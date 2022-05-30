@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using HRMSCoreWebApp.Models;
-using Microsoft.AspNetCore.Session;
 
 namespace HRMSCoreWebApp.Controllers
 {
@@ -28,7 +27,6 @@ namespace HRMSCoreWebApp.Controllers
             return await _context.EmployeeMaster.ToListAsync();
         }
 
-
         // GET: api/EmployeeAPI
         [HttpPost]
         [Route("Login")]
@@ -39,7 +37,7 @@ namespace HRMSCoreWebApp.Controllers
             {
                 if (_admin.Where(s => s.Password.Equals(employee.Password)).Any())
                 {
-                    return CreatedAtAction("GetEmployeeMaster", new { id = employee.EmployeeId }, _admin        );
+                    return CreatedAtAction("GetEmployeeMaster", new { id = employee.EmployeeId }, _admin);
                     //return Json(new { status = true, message = "Login Successfull!" });
                 }
                 else

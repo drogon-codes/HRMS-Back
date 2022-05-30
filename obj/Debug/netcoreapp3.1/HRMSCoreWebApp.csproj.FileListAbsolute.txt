@@ -147,4 +147,9 @@ G:\HRMS\HRMSCoreWebApp\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols
 G:\HRMS\HRMSCoreWebApp\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 G:\HRMS\HRMSCoreWebApp\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
 G:\HRMS\HRMSCoreWebApp\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
+G:\HRMS\HRMSCoreWebApp\bin\Debug\netcoreapp3.1\System.Web.Cors.dll
+G:\HRMS\HRMSCoreWebApp\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
+G:\HRMS\HRMSCoreWebApp\bin\Debug\netcoreapp3.1\System.Web.Http.dll
+G:\HRMS\HRMSCoreWebApp\bin\Debug\netcoreapp3.1\System.Web.Http.Cors.dll
+G:\HRMS\HRMSCoreWebApp\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
 G:\HRMS\HRMSCoreWebApp\obj\Debug\netcoreapp3.1\HRMSCoreWebApp.csproj.AssemblyReference.cache

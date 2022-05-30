@@ -55,13 +55,11 @@ namespace HRMSCoreWebApp.Models
                 entity.HasOne(d => d.Allowance)
                     .WithMany(p => p.AllowanceGrade)
                     .HasForeignKey(d => d.AllowanceId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_AllowanceGrade_AllowanceMaster");
 
                 entity.HasOne(d => d.Grade)
                     .WithMany(p => p.AllowanceGrade)
                     .HasForeignKey(d => d.GradeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_AllowanceGrade_GradeMaster");
             });
 
@@ -83,7 +81,6 @@ namespace HRMSCoreWebApp.Models
                 entity.HasOne(d => d.Employee)
                     .WithMany(p => p.AttendanceMaster)
                     .HasForeignKey(d => d.EmployeeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_AttendanceMaster_EmployeeMaster");
             });
 
@@ -96,7 +93,6 @@ namespace HRMSCoreWebApp.Models
                 entity.HasOne(d => d.State)
                     .WithMany(p => p.CityMaster)
                     .HasForeignKey(d => d.StateId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_CityMaster_StateMaster");
             });
 
@@ -105,13 +101,11 @@ namespace HRMSCoreWebApp.Models
                 entity.HasOne(d => d.Deduction)
                     .WithMany(p => p.DeductionGrade)
                     .HasForeignKey(d => d.DeductionId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_DeductionGrade_DeductionMaster");
 
                 entity.HasOne(d => d.Grade)
                     .WithMany(p => p.DeductionGrade)
                     .HasForeignKey(d => d.GradeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_DeductionGrade_GradeMaster");
             });
 
@@ -139,7 +133,6 @@ namespace HRMSCoreWebApp.Models
                 entity.HasOne(d => d.City)
                     .WithMany(p => p.DepartmentMaster)
                     .HasForeignKey(d => d.CityId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_DepartmentMaster_CityMaster");
             });
 
@@ -148,13 +141,11 @@ namespace HRMSCoreWebApp.Models
                 entity.HasOne(d => d.Designation)
                     .WithMany(p => p.DesignationGrade)
                     .HasForeignKey(d => d.DesignationId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_DesignationGrade_DesignationMaster");
 
                 entity.HasOne(d => d.Grade)
                     .WithMany(p => p.DesignationGrade)
                     .HasForeignKey(d => d.GradeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_DesignationGrade_GradeMaster");
             });
 
@@ -167,7 +158,6 @@ namespace HRMSCoreWebApp.Models
                 entity.HasOne(d => d.Department)
                     .WithMany(p => p.DesignationMaster)
                     .HasForeignKey(d => d.DepartmentId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_DesignationMaster_DepartmentMaster");
             });
 
@@ -180,13 +170,11 @@ namespace HRMSCoreWebApp.Models
                 entity.HasOne(d => d.Employee)
                     .WithMany(p => p.EmployeeGrade)
                     .HasForeignKey(d => d.EmployeeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_EmployeeGrade_EmployeeMaster");
 
                 entity.HasOne(d => d.Grade)
                     .WithMany(p => p.EmployeeGrade)
                     .HasForeignKey(d => d.GradeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_EmployeeGrade_GradeMaster");
             });
 
@@ -229,6 +217,7 @@ namespace HRMSCoreWebApp.Models
                 entity.HasOne(d => d.City)
                     .WithMany(p => p.EmployeeMaster)
                     .HasForeignKey(d => d.CityId)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_EmployeeMaster_CityMaster");
             });
 
@@ -241,7 +230,6 @@ namespace HRMSCoreWebApp.Models
                 entity.HasOne(d => d.Employee)
                     .WithMany(p => p.EmployeeSalary)
                     .HasForeignKey(d => d.EmployeeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_EmployeeSalary_EmployeeMaster");
             });
 
@@ -269,6 +257,10 @@ namespace HRMSCoreWebApp.Models
 
                 entity.Property(e => e.FromDate).HasColumnType("date");
 
+                entity.Property(e => e.IsApproved)
+                    .HasColumnName("isApproved")
+                    .HasColumnType("text");
+
                 entity.Property(e => e.Reason).HasColumnType("text");
 
                 entity.Property(e => e.ToDate).HasColumnType("date");
@@ -276,7 +268,6 @@ namespace HRMSCoreWebApp.Models
                 entity.HasOne(d => d.Employee)
                     .WithMany(p => p.LeaveMaster)
                     .HasForeignKey(d => d.EmployeeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_LeaveMaster_EmployeeMaster");
             });
 
@@ -287,13 +278,11 @@ namespace HRMSCoreWebApp.Models
                 entity.HasOne(d => d.Employee)
                     .WithMany(p => p.PromotionMaster)
                     .HasForeignKey(d => d.EmployeeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_PromotionMaster_EmployeeMaster");
 
                 entity.HasOne(d => d.Grade)
                     .WithMany(p => p.PromotionMaster)
                     .HasForeignKey(d => d.GradeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_PromotionMaster_GradeMaster");
             });
 
@@ -308,7 +297,6 @@ namespace HRMSCoreWebApp.Models
                 entity.HasOne(d => d.Salary)
                     .WithMany(p => p.SalaryPayment)
                     .HasForeignKey(d => d.SalaryId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_SalaryPayment_EmployeeSalary");
             });
 

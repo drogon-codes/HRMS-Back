@@ -14,6 +14,7 @@ namespace HRMSCoreWebApp.Models
         public DateTime? FromDate { get; set; }
         public DateTime? ToDate { get; set; }
         public string Reason { get; set; }
+        public string IsApproved { get; set; }
 
         public virtual EmployeeMaster Employee { get; set; }
     }
