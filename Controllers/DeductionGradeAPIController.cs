@@ -41,6 +41,37 @@ namespace HRMSCoreWebApp.Controllers
             return deductionGrade;
         }
 
+        // GET: api/AllowanceGradeAPI/5
+        [HttpGet]
+        [Route("{DeductionDetail}/{GradeId}")]
+        public async Task<ActionResult<IEnumerable<DeductionDetail>>> GetDeductionByGradeId(int GradeId)
+        {
+            var deductionGrade = await _context.DeductionGrade.FindAsync(GradeId);
+
+            List<DeductionDetail> allowances = null;
+            allowances = await (from dg in _context.DeductionGrade
+                                join dm in _context.DeductionMaster
+                                on dg.DeductionId equals dm.DeductionId
+                                where dg.GradeId == GradeId
+                                select new DeductionDetail
+                                {
+                                    DeductionId = dg.DeductionId,
+                                    DeductionName = dm.DeductionName,
+                                    DeductionRate = dg.DeductionRate,
+                                    DeductionGradeId = dg.DeductionGradeId,
+                                    GradeId = dg.GradeId,
+                                    DeductionType = dm.DeductionType
+                                }
+                                ).ToListAsync<DeductionDetail>();
+
+            if (allowances == null)
+            {
+                return NotFound();
+            }
+
+            return allowances;
+        }
+
         // PUT: api/DeductionGradeAPI/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.

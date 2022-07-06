@@ -27,6 +27,27 @@ namespace HRMSCoreWebApp.Controllers
             return await _context.AttendanceMaster.ToListAsync();
         }
 
+        // GET: api/AttendanceAPI/AttendanceByEmployee/EmployeeID
+        [HttpGet]
+        [Route("{AttendanceByEmployee}/{id}")]
+        public async Task<ActionResult<IEnumerable<AttendanceByEmployee>>> GetAttendanceByEmployee(int id)
+        {
+            List<AttendanceByEmployee> attendance = null;
+            attendance = await (from am in _context.AttendanceMaster
+                                where am.EmployeeId == id
+                                select new AttendanceByEmployee
+                                {
+                                   AttendanceId=am.AttendanceId,
+                                   EmployeeId=am.EmployeeId,
+                                   TimeOfArrival=am.TimeOfArrival,
+                                   TimeOfLeave=am.TimeOfLeave,
+                                   OverTimeHours=am.OverTimeHours,
+                                   AttendanceDate=am.AttendanceDate,
+                                   TotalHours = am.TimeOfLeave - am.TimeOfArrival
+                                }).ToListAsync<AttendanceByEmployee>();
+             return attendance;
+        }
+
         // GET: api/AttendanceAPI/5
         [HttpGet("{id}")]
         public async Task<ActionResult<AttendanceMaster>> GetAttendanceMaster(int id)

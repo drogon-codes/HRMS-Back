@@ -22,9 +22,42 @@ namespace HRMSCoreWebApp.Controllers
 
         // GET: api/DesignationAPI
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<DesignationMaster>>> GetDesignationMaster()
+        public async Task<ActionResult<IEnumerable<DesignationDepartment>>> GetDesignationMaster()
         {
-            return await _context.DesignationMaster.ToListAsync();
+            List<DesignationDepartment> des = null;
+            des = await (from ds in _context.DesignationMaster
+                         join dp in _context.DepartmentMaster
+                         on ds.DepartmentId equals dp.DepartmentId
+                         select new DesignationDepartment 
+                         {
+                             DesignationId = ds.DesignationId,
+                             DesignationName = ds.DesignationName,
+                             DepartmentId = ds.DepartmentId,
+                             DepartmentName = dp.DepartmentName
+                         }
+                         ).ToListAsync<DesignationDepartment>();
+            return des;
+        }
+
+        // GET: api/DesignationAPI
+        [HttpGet]
+        [Route("{GetDesignationByDepartment}/{DeptId}")]
+        public async Task<ActionResult<IEnumerable<DesignationDepartment>>> GetDesignationByDepartment(int deptId)
+        {
+            List<DesignationDepartment> des = null;
+            des = await (from ds in _context.DesignationMaster
+                         join dp in _context.DepartmentMaster
+                         on ds.DepartmentId equals dp.DepartmentId
+                         where ds.DepartmentId == deptId
+                         select new DesignationDepartment
+                         {
+                             DesignationId = ds.DesignationId,
+                             DesignationName = ds.DesignationName,
+                             DepartmentId = ds.DepartmentId,
+                             DepartmentName = dp.DepartmentName
+                         }
+                         ).ToListAsync<DesignationDepartment>();
+            return des;
         }
 
         // GET: api/DesignationAPI/5

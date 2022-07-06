@@ -22,9 +22,21 @@ namespace HRMSCoreWebApp.Controllers
 
         // GET: api/DepartmentAPI
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<DepartmentMaster>>> GetDepartmentMaster()
+        public async Task<ActionResult<IEnumerable<DepartmentCity>>> GetDepartmentMaster()
         {
-            return await _context.DepartmentMaster.ToListAsync();
+            List<DepartmentCity> deps = null;
+            deps = await (from d in _context.DepartmentMaster
+                          join c in _context.CityMaster
+                          on d.CityId equals c.CityId
+                          select new DepartmentCity
+                          {
+                              DepartmentId = d.DepartmentId,
+                              DepartmentName = d.DepartmentName,
+                              CityId = d.CityId,
+                              CityName = c.CityName,
+                              DepartmentAddress = d.DepartmentAddress
+                          }).ToListAsync<DepartmentCity>();
+            return deps;
         }
 
         // GET: api/DepartmentAPI/5

@@ -22,9 +22,20 @@ namespace HRMSCoreWebApp.Controllers
 
         // GET: api/CityAPI
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CityMaster>>> GetCityMaster()
+        public async Task<ActionResult<IEnumerable<CityState>>> GetCityMaster()
         {
-            return await _context.CityMaster.ToListAsync();
+            List<CityState> cities = null;
+            cities = await (from c in _context.CityMaster
+                            join s in _context.StateMaster
+                            on c.StateId equals s.StateId
+                            select new CityState
+                            {
+                                CityId = c.CityId,
+                                CityName = c.CityName,
+                                StateId = c.StateId,
+                                StateName = s.StateName
+                            }).ToListAsync<CityState>();
+            return cities;
         }
 
         // GET: api/CityAPI/5
